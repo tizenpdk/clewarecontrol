@@ -260,9 +260,8 @@ int cwOpenCleware(const char *path = NULL)
 	{
 		data[n].v = cur_dev->vendor_id;
 		data[n].p = cur_dev->product_id;
-		data[n].hidpath = (char *)malloc(16);
-                strncpy(data[n].hidpath, cur_dev->path, 16);
-
+		data[n].hidpath = strdup(cur_dev->path);
+                
 		data[n].gadgettype = (enum USBtype_enum)data[n].p;
 		data[n].gadgetVersionNo = cur_dev -> release_number;
 
