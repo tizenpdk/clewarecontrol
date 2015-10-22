@@ -61,7 +61,6 @@ cwIOX(int deviceNo, int addr, int datum) {	// return datum if ok, datum=-1=Read 
 	int version = data[deviceNo].gadgetVersionNo ;
 	int sixteenbit = (devType == TEMPERATURE2_DEVICE || devType == HUMIDITY1_DEVICE || devType == HUMIDITY2_DEVICE) ;
 
-
 	if (datum >= 0) {		// -1 = Read command
 		buf[0] = EEwrite ;
 		if (sixteenbit) {
@@ -263,7 +262,7 @@ int cwOpenCleware(const char *path = NULL)
 		data[n].v = cur_dev->vendor_id;
 		data[n].p = cur_dev->product_id;
 		data[n].hidpath = strdup(cur_dev->path);
-                
+
 		data[n].gadgettype = (enum USBtype_enum)data[n].p;
 		data[n].gadgetVersionNo = cur_dev -> release_number;
 
