@@ -3,6 +3,8 @@
 // (C) 2001 Copyright Cleware GmbH
 // All rights reserved
 //
+// Converted to HidApi by folkert van Heusden, mail@vanheusden.com
+//
 // History:
 // 05.01.01	ws	Initial coding
 // 01.11.01	ws	Linux coding
