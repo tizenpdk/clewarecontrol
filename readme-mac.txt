@@ -1,8 +1,6 @@
 requirements
 ------------
-For this software to run, you need the "hidapi" library.
-Either get it from signal11.us as sourcecode (you then also need the xcode software package (from Apple) to compile it) or install it from homebrew.
-
+No extra software is required.
 
 who/what/where
 --------------
@@ -14,11 +12,13 @@ Please note that I'm a busy man so it may take a bit before I respond.
 
 usage
 -----
-Please see the man-page for help on how to use it:
-	make clewarecontrol
+Clewarecontrol is a command-line program. You can run it from within e.g. the "terminal"-program.
 
-or run the program with the -h switch:
+To see a list of options, invoke:
 	clewarecontrol -h
+
+To, for example, see a list of all Cleware devices connected to your mac, run:
+	clewarecontrol -l
 
 Please also check the website for tips and help.
 

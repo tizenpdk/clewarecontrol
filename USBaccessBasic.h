@@ -12,7 +12,11 @@
 #ifndef __USBACCESSBASIC_H__
 #define __USBACCESSBASIC_H__
 
+#ifdef __APPLE__
+#include "mac-hidapi/hidapi.h"
+#else
 #include <hidapi/hidapi.h>
+#endif
 
 typedef hid_device * HANDLE;
 

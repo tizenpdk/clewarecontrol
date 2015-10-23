@@ -24,14 +24,6 @@ cleware_perl:
 	g++ `perl -MConfig -e 'print $$Config{lddlflags}'` cleware_wrap.o USBaccessBasic.o USBaccess.o -o cleware.so
 	./install-lib.pl
 
-dmg: clewarecontrol
-	rm -rf macosx
-	mkdir -p macosx
-	cp clewarecontrol clewarecontrol.1 macosx/
-	cp readme-mac.txt macosx/
-	rm -f clewarecontrol-$(VERSION).dmg
-	hdiutil create -srcfolder macosx -volname "ClewareControl" -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDRW -size 4096k clewarecontrol-$(VERSION).dmg
-
 install: clewarecontrol
 	cp clewarecontrol $(DESTDIR)/usr/bin
 	cp clewarecontrol.1 $(DESTDIR)/usr/share/man/man1/clewarecontrol.1

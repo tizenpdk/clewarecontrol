@@ -31,7 +31,12 @@
 #ifndef __USBACCESS_H__
 #define __USBACCESS_H__
 
+#ifdef __APPLE__
+#include "mac-hidapi/hidapi.h"
+#else
 #include <hidapi/hidapi.h>
+#endif
+
 typedef hid_device * HANDLE;
 
 const int USBaccessVersion = 330 ;
