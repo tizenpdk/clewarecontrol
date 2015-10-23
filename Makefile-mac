@@ -1,0 +1,39 @@
+# $Revision: 100 $
+VERSION=4.1
+
+DEBUG=-g -W -pedantic #-pg #-fprofile-arcs
+LDFLAGS+=-framework IOKit -framework CoreFoundation
+CXXFLAGS+=-O3 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
+CFLAGS+=$(CXXFLAGS)
+
+OBJS=main.o USBaccessBasic.o USBaccess.o error.o mac-hidapi/hid.o
+
+all: clewarecontrol
+
+clewarecontrol: $(OBJS)
+	$(CXX) $(OBJS) $(LDFLAGS) -o clewarecontrol
+
+cleware_python:
+	swig -c++ -python cleware.i
+	python setup.py build_ext --inplace
+	./install-lib.py
+
+cleware_perl:
+	swig -c++ -perl5 cleware.i
+	g++ -c `perl -MConfig -e 'print join(" ", @Config{qw(ccflags optimize cccdlflags)}, "-I$$Config{archlib}/CORE")'` cleware_wrap.cxx USBaccessBasic.cpp USBaccess.cpp
+	g++ `perl -MConfig -e 'print $$Config{lddlflags}'` cleware_wrap.o USBaccessBasic.o USBaccess.o -o cleware.so
+	./install-lib.pl
+
+dmg: clewarecontrol
+	rm -rf macosx
+	mkdir -p macosx
+	cp clewarecontrol clewarecontrol.1 macosx/
+	cp readme-mac.txt macosx/
+	rm -f clewarecontrol-$(VERSION).dmg
+	hdiutil create -srcfolder macosx -volname "ClewareControl" -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDRW -size 1024k clewarecontrol-$(VERSION).dmg
+
+clean:
+	rm -rf $(OBJS) clewarecontrol core gmon.out *.da build cleware_wrap.cxx _cleware.so cleware.py* cleware.pm *.o cleware.so
+
+check:
+	cppcheck -v --enable=all --inconclusive -I. . 2> err.txt

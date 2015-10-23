@@ -2,17 +2,20 @@ requirements
 ------------
 No extra software is required.
 
+
 who/what/where
 --------------
 clewarecontrol is written by Folkert van Heusden.
 It is specifically meant to control Cleware devices from within MacOS X.
-Please do NOT contact cleware if you have problems with this software on your Mac, contact me instead at: mail@vanheusden.com
+Please do NOT contact cleware if you have problems with this software on your
+Mac, contact me instead at: mail@vanheusden.com
 Please note that I'm a busy man so it may take a bit before I respond.
 
 
 usage
 -----
-Clewarecontrol is a command-line program. You can run it from within e.g. the "terminal"-program.
+Clewarecontrol is a command-line program. You can run it from within e.g. the
+"terminal"-program.
 
 To see a list of options, invoke:
 	clewarecontrol -h
@@ -89,4 +92,9 @@ If the ADC tells us that the voltage is over 0.5 volts, then "myscript.sh" is
 invoked. As a parameter, the script will get the measured value.
 
 
+miscellaneous
+-------------
 I would be delighted if you share your experiences with me!
+
+Please note: this software contains "hidapi". The original hidapi can be
+retrieved from http://www.signal11.us/oss/hidapi/
