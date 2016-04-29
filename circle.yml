@@ -37,6 +37,8 @@ dependencies:
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --cflags hidapi ; exit 0
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --libs hidapi ; exit 0
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
+    
+    - ls -al
 test:
   pre:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
