@@ -3,9 +3,6 @@ machine:
     Europe/Vienna
   environment:
     _SDK_: /usr/local/android-sdk-linux/
-general:
-  artifacts:
-    ./clewarecontrol
 dependencies:
   override:
     - echo dummy
@@ -30,6 +27,7 @@ dependencies:
 
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
     - ls -al
+    - cp -av clewarecontrol $CIRCLE_ARTIFACTS/clewarecontrol_$CIRCLE_SHA1.apk || exit 1
     - clewarecontrol # test binary
 test:
   pre:
