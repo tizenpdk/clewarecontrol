@@ -27,8 +27,8 @@ dependencies:
 
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
     - ls -al
-    - cp -av clewarecontrol $CIRCLE_ARTIFACTS/clewarecontrol_$CIRCLE_SHA1.apk || exit 1
-    - clewarecontrol # test binary
+    - cp -av clewarecontrol $CIRCLE_ARTIFACTS/clewarecontrol_$CIRCLE_SHA1 || exit 1
+    - ./clewarecontrol # test binary
 test:
   pre:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
