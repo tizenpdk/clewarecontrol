@@ -10,23 +10,17 @@ dependencies:
   cache_directories:
     - ~/.gradle
   override:
-    - echo "dummy"
+    - echo dummy; ls -al
   pre:
     - sudo apt-get update > /dev/null 2> /dev/null
     - sudo apt-get install telnet > /dev/null 2> /dev/null
     - sudo apt-get install x11-utils > /dev/null 2> /dev/null
     - sudo apt-get install xvkbd > /dev/null 2> /dev/null
-
     - sudo apt-get install libhidapi-dev
-
     - make
-
     - pwd ; ls -al
-
-    - # cp -av app-signed-aligned.apk $CIRCLE_ARTIFACTS/finegeotag_circleci_$CIRCLE_SHA1.apk || exit 1
 test:
   pre:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
   override:
     - echo dummy
-
