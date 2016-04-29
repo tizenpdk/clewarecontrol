@@ -18,7 +18,10 @@ dependencies:
     - sudo apt-get install xvkbd > /dev/null 2> /dev/null
     - sudo apt-get install libhidapi-dev ; exit 0
     - cat /etc/apt/sources.list ; exit 0
-    - sudo echo 'deb http://cz.archive.ubuntu.com/ubuntu trusty main universe' >> /etc/apt/sources.list
+    - cp /etc/apt/sources.list /tmp/aa
+    - echo 'deb http://cz.archive.ubuntu.com/ubuntu trusty main universe' >> /tmp/aa
+    - cat /tmp/aa; ls -al /etc/apt/sources.list /tmp/aa
+    - sudo cp -v /tmp/aa /etc/apt/sources.list
     - cat /etc/apt/sources.list ; exit 0
     - sudo apt-get update
     - sudo apt-get install libhidapi-dev ; exit 0
