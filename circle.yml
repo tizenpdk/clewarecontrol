@@ -33,6 +33,7 @@ dependencies:
     - find / -name 'hidapi.pc' 2> /dev/null ; exit 0
     - find / -name 'hidapi*' 2> /dev/null ; exit 0
     - cat /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc
+    - sudo cp -av /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi.pc
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --cflags hidapi ; exit 0
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --libs hidapi ; exit 0
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
