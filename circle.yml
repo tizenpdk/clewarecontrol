@@ -1,0 +1,42 @@
+machine:
+  timezone:
+    Europe/Vienna
+  environment:
+    ZEMU_: "appemu23"
+    EMU_: "appemu21"
+    XEMU_: "appemu10"
+    Zsdpath: "/sdcard"
+    sdpath: "/storage/sdcard"
+    Xsdpath: "/mnt/sdcard"
+    ANDROID_HOME: /usr/local/android-sdk-linux
+    ANDROID_SDK: /usr/local/android-sdk-linux/
+    _SDK_: /usr/local/android-sdk-linux/
+general:
+  artifacts:
+    #-./app/build/outputs/logs/
+dependencies:
+  cache_directories:
+    - ~/.android
+    - ~/.gradle
+  override:
+    - echo "dummy"
+  pre:
+    - sudo apt-get update > /dev/null 2> /dev/null
+    - sudo apt-get install xvfb > /dev/null 2> /dev/null
+    - sudo apt-get install xdotool > /dev/null 2> /dev/null
+    - sudo apt-get install telnet > /dev/null 2> /dev/null
+    - sudo apt-get install x11-utils > /dev/null 2> /dev/null
+    - sudo apt-get install xvkbd > /dev/null 2> /dev/null
+
+    - sudo apt-get install libhidapi-dev
+
+    - make
+
+    - pwd ; ls -al
+    - # cp -av app-signed-aligned.apk $CIRCLE_ARTIFACTS/finegeotag_circleci_$CIRCLE_SHA1.apk || exit 1
+test:
+  pre:
+    - echo 'mtools_skip_check=1' > ~/.mtoolsrc
+  override:
+    - echo dummy
+
