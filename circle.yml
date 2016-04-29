@@ -5,40 +5,32 @@ machine:
     _SDK_: /usr/local/android-sdk-linux/
 general:
   artifacts:
-    #-./app/build/outputs/logs/
+    ./clewarecontrol
 dependencies:
-  cache_directories:
-    - ~/.gradle
   override:
-    - echo dummy; ls -al
+    - echo dummy
   pre:
     - sudo apt-get update > /dev/null 2> /dev/null
     - sudo apt-get install telnet > /dev/null 2> /dev/null
     - sudo apt-get install x11-utils > /dev/null 2> /dev/null
     - sudo apt-get install xvkbd > /dev/null 2> /dev/null
-    - sudo apt-get install libhidapi-dev ; exit 0
-    - cat /etc/apt/sources.list ; exit 0
+
+# install libhidapi ----------------
     - cp /etc/apt/sources.list /tmp/aa
     - echo 'deb http://cz.archive.ubuntu.com/ubuntu trusty main universe' >> /tmp/aa
     - cat /tmp/aa; ls -al /etc/apt/sources.list /tmp/aa
     - sudo cp -v /tmp/aa /etc/apt/sources.list
-    - cat /etc/apt/sources.list ; exit 0
     - sudo apt-get update
-    - sudo apt-get install libhidapi-dev ; exit 0
-    - aptitude search libhidapi ; exit 0
-    - cat /etc/os-release ; exit 0
-    - uname -a
-    - pwd ; ls -al
-    - dpkg-query -L libhidapi-dev ; exit 0
-    - find / -name 'hidapi.pc' 2> /dev/null ; exit 0
-    - find / -name 'hidapi*' 2> /dev/null ; exit 0
-    - cat /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc
+    - sudo apt-get install libhidapi-dev
+    - dpkg-query -L libhidapi-dev
     - sudo cp -av /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi.pc
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --cflags hidapi ; exit 0
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --libs hidapi ; exit 0
+# install libhidapi ----------------
+
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
-    
     - ls -al
+    - clewarecontrol # test binary
 test:
   pre:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
