@@ -23,20 +23,20 @@ dependencies:
     - sudo apt-get install libhidapi-dev
     - dpkg-query -L libhidapi-dev
     - sudo cp -av /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi.pc
-    - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --cflags hidapi ; exit 0
+    - pkg-config --cflags hidapi ; exit 0
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --libs hidapi ; exit 0
 # install libhidapi ----------------
 
-    - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
-    - sudo -- sh -c "export PKG_CONFIG_PATH=\"/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_python"
-    - sudo -- sh -c "export PKG_CONFIG_PATH=\"/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_perl"
+    - make
+    - sudo -- sh -c "make cleware_python"
+    - sudo -- sh -c "make cleware_perl"
     - sudo make install
 
     - ls -al
     - cp -av clewarecontrol $CIRCLE_ARTIFACTS/clewarecontrol_$CIRCLE_SHA1 || exit 1
-    - ./clewarecontrol -l # test binary
 test:
   pre:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
   override:
-    - echo dummy
+    - ./clewarecontrol -l # test binary
+    - printf 'import cleware \n' | python # test python extension
