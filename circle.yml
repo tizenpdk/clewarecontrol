@@ -33,7 +33,15 @@ dependencies:
     - sudo make install
 
     - ls -al
+    - ls -alR build
+
     - cp -av clewarecontrol $CIRCLE_ARTIFACTS/clewarecontrol_$CIRCLE_SHA1 || exit 1
+    - mkdir $CIRCLE_ARTIFACTS/perl
+    - cp -av cleware.so $CIRCLE_ARTIFACTS/perl/ || exit 1
+    - cp -av cleware.pm $CIRCLE_ARTIFACTS/perl/ || exit 1
+    - mkdir $CIRCLE_ARTIFACTS/python
+    - cp -av cleware.py $CIRCLE_ARTIFACTS/python/ || exit 1
+    - cp -av _cleware.so $CIRCLE_ARTIFACTS/python/ || exit 1
 test:
   pre:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
