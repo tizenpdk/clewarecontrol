@@ -50,7 +50,7 @@ test:
     - ./clewarecontrol -l # test binary
 
     - printf 'import cleware \n' | python ; exit 0 # test python extension --> symbol not found
-    - ./example.py ; exit 0
+    - export LD_LIBRARY_PATH="." ; ./example.py ; exit 0
     
-    - printf 'use Module::Load; \n load cleware; \n '|perl -w # test perl module
-    - ./example.pl
+    - export LD_LIBRARY_PATH="." ; printf 'use Module::Load; \n load cleware; \n '|perl -w # test perl module
+    - export LD_LIBRARY_PATH="." ; ./example.pl
