@@ -48,3 +48,5 @@ test:
   override:
     - ./clewarecontrol -l # test binary
     - printf 'import cleware \n' | python ; exit 0 # test python extension --> symbol not found
+    - printf 'use Module::Load; \n load cleware'; \n '|perl -w # test perl module
+    - ./example.pl
