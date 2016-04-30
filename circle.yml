@@ -13,6 +13,7 @@ dependencies:
     - sudo apt-get install x11-utils > /dev/null 2> /dev/null
     - sudo apt-get install xvkbd > /dev/null 2> /dev/null
     - sudo apt-get install swig
+    - sudo apt-get install python-dev ; exit 0
 
 # install libhidapi ----------------
     - cp /etc/apt/sources.list /tmp/aa
@@ -47,6 +48,9 @@ test:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
   override:
     - ./clewarecontrol -l # test binary
+
     - printf 'import cleware \n' | python ; exit 0 # test python extension --> symbol not found
-    - printf 'use Module::Load; \n load cleware'; \n '|perl -w # test perl module
+    - ./example.py ; exit 0
+    
+    - printf 'use Module::Load; \n load cleware; \n '|perl -w # test perl module
     - ./example.pl
