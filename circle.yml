@@ -27,8 +27,8 @@ dependencies:
 # install libhidapi ----------------
 
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
-    - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make cleware_python
-    - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make cleware_perl
+    - sudo -- sh -c \"export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_python"
+    - sudo -- sh -c \"export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_perl"
     - sudo make install
 
     - ls -al
