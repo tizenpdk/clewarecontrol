@@ -3,6 +3,7 @@ machine:
     Europe/Vienna
   environment:
     _SDK_: /usr/local/android-sdk-linux/
+    PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
 dependencies:
   override:
     - echo dummy
@@ -27,8 +28,8 @@ dependencies:
 # install libhidapi ----------------
 
     - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; make
-    - sudo -- sh -c \"export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_python"
-    - sudo -- sh -c \"export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_perl"
+    - sudo -- sh -c "export PKG_CONFIG_PATH=\"/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_python"
+    - sudo -- sh -c "export PKG_CONFIG_PATH=\"/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH\" ; make cleware_perl"
     - sudo make install
 
     - ls -al
