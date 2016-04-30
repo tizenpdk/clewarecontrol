@@ -30,6 +30,7 @@ dependencies:
 # install libhidapi ----------------
 
     - make
+    - sed -e 's#.o -o cle#.o -lhidapi-libusb -o cle#' Makefile # add hidapi-libusb to perl compile command!!
     - sudo -- sh -c "make cleware_python"
     - sudo -- sh -c "make cleware_perl"
     - sudo make install
@@ -50,8 +51,8 @@ test:
   override:
     - ./clewarecontrol -l # test binary
 
-    - printf 'import cleware \n' | python ; exit 0 # test python extension --> symbol not found
-    - ./example.py ; exit 0
+    - printf 'import cleware \n' | python # test python extension --> symbol not found
+    - ./example.py
     
     - printf 'use Module::Load; \n load cleware; \n '|perl -w # test perl module
-    - ./example.pl ; exit 0
+    - ./example.pl
