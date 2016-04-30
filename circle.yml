@@ -54,6 +54,7 @@ dependencies:
     - ldd _cleware.so
 # --- python extension ---
 
+    - make # make binary again
     - ls -al
 
 test:
