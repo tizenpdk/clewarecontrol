@@ -29,12 +29,21 @@ dependencies:
     - pkg-config --libs hidapi ; exit 0
 # install libhidapi ----------------
 
+# --- binary ---
     - make
-    - sed -i -e 's#.o -o cle#.o -lhidapi-libusb -o cle#' Makefile # add hidapi-libusb to perl compile command!!
-    - cp setup.py_CI setup.py # use setup file with added libs
-    - sudo -- sh -c "make cleware_python"
-    - sudo -- sh -c "make cleware_perl"
     - sudo make install
+# --- binary ---
+
+# --- perl extension ---
+    - sed -i -e 's#.o -o cle#.o -lhidapi-libusb -o cle#' Makefile # add hidapi-libusb to perl compile command!!
+    - sudo -- sh -c "make cleware_perl"
+# --- perl extension ---
+
+# --- python extension ---
+    - cp setup.py_CI setup.py # use setup file with added libs
+    - sudo make clean
+    - sudo -- sh -c "make cleware_python"
+# --- python extension ---
 
     - ls -al
     - ls -alR build
@@ -54,7 +63,7 @@ test:
   override:
     - ./clewarecontrol -l # test binary
 
-    - printf 'import cleware \n' | python # test python extension --> symbol not found
+    - printf 'import cleware \n' | python # test python extension
     - ./example.py
     
     - printf 'use Module::Load; \n load cleware; \n '|perl -w # test perl module
