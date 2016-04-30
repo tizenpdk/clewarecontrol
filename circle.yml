@@ -32,31 +32,30 @@ dependencies:
 # --- binary ---
     - make
     - sudo make install
+    - cp -av clewarecontrol $CIRCLE_ARTIFACTS/clewarecontrol_$CIRCLE_SHA1 || exit 1
 # --- binary ---
 
 # --- perl extension ---
     - sed -i -e 's#.o -o cle#.o -lhidapi-libusb -o cle#' Makefile # add hidapi-libusb to perl compile command!!
     - sudo -- sh -c "make cleware_perl"
+    - mkdir $CIRCLE_ARTIFACTS/perl
+    - cp -av cleware.so $CIRCLE_ARTIFACTS/perl/ || exit 1
+    - ldd cleware.so
+    - cp -av cleware.pm $CIRCLE_ARTIFACTS/perl/ || exit 1
 # --- perl extension ---
 
 # --- python extension ---
     - cp setup.py_CI setup.py # use setup file with added libs
     - sudo make clean
     - sudo -- sh -c "make cleware_python"
-# --- python extension ---
-
-    - ls -al
-    - ls -alR build
-
-    - cp -av clewarecontrol $CIRCLE_ARTIFACTS/clewarecontrol_$CIRCLE_SHA1 || exit 1
-    - mkdir $CIRCLE_ARTIFACTS/perl
-    - cp -av cleware.so $CIRCLE_ARTIFACTS/perl/ || exit 1
-    - ldd cleware.so
-    - cp -av cleware.pm $CIRCLE_ARTIFACTS/perl/ || exit 1
     - mkdir $CIRCLE_ARTIFACTS/python
     - cp -av cleware.py $CIRCLE_ARTIFACTS/python/ || exit 1
     - cp -av _cleware.so $CIRCLE_ARTIFACTS/python/ || exit 1
     - ldd _cleware.so
+# --- python extension ---
+
+    - ls -al
+
 test:
   pre:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
