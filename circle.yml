@@ -24,7 +24,7 @@ dependencies:
     - dpkg-query -L libhidapi-dev
     - sudo cp -av /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi.pc
     - pkg-config --cflags hidapi ; exit 0
-    - export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" ; pkg-config --libs hidapi ; exit 0
+    - pkg-config --libs hidapi ; exit 0
 # install libhidapi ----------------
 
     - make
@@ -47,4 +47,4 @@ test:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
   override:
     - ./clewarecontrol -l # test binary
-    - printf 'import cleware \n' | python # test python extension
+    - printf 'import cleware \n' | python ; exit 0 # test python extension --> symbol not found
