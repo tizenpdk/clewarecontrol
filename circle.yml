@@ -16,14 +16,22 @@ dependencies:
     - sudo apt-get install python-dev ; exit 0
 
 # install libhidapi ----------------
-    - cp /etc/apt/sources.list /tmp/aa
-    - echo 'deb http://cz.archive.ubuntu.com/ubuntu trusty main universe' >> /tmp/aa
-    - cat /tmp/aa; ls -al /etc/apt/sources.list /tmp/aa
-    - sudo cp -v /tmp/aa /etc/apt/sources.list
-    - sudo apt-get update
-    - sudo apt-get install libhidapi-dev
-    - dpkg-query -L libhidapi-dev
-    - sudo cp -av /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi.pc
+    #- cp /etc/apt/sources.list /tmp/aa
+    #- echo 'deb http://cz.archive.ubuntu.com/ubuntu trusty main universe' >> /tmp/aa
+    #- cat /tmp/aa; ls -al /etc/apt/sources.list /tmp/aa
+    #- sudo cp -v /tmp/aa /etc/apt/sources.list
+    #- sudo apt-get update
+    #- sudo apt-get install libhidapi-dev
+    #- dpkg-query -L libhidapi-dev
+    #- sudo cp -av /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi-libusb.pc /usr/lib/x86_64-linux-gnu/pkgconfig/hidapi.pc
+    #- pkg-config --cflags hidapi ; exit 0
+    #- pkg-config --libs hidapi ; exit 0
+    
+    - mkdir ~/lh/
+    - cd ~lh/ ; svn co svn://svn.debian.org/libhid/trunk libhid-svn
+    - cd libhid-svn/
+    - ./autogen.sh ; ./configure && make
+    - sudo make install
     - pkg-config --cflags hidapi ; exit 0
     - pkg-config --libs hidapi ; exit 0
 # install libhidapi ----------------
