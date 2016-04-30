@@ -31,6 +31,7 @@ dependencies:
 
     - make
     - sed -e 's#.o -o cle#.o -lhidapi-libusb -o cle#' Makefile # add hidapi-libusb to perl compile command!!
+    - cp setup.py_CI setup.py # use setup file with added libs
     - sudo -- sh -c "make cleware_python"
     - sudo -- sh -c "make cleware_perl"
     - sudo make install
