@@ -1,9 +1,9 @@
 # $Revision: 100 $
-VERSION=4.2
+VERSION=4.3
 
 DEBUG=-g -W -pedantic #-pg #-fprofile-arcs
-LDFLAGS+=`pkg-config --libs hidapi`
-CXXFLAGS+=-O3 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG) `pkg-config --cflags hidapi`
+LDFLAGS+=`pkg-config --libs hidapi-hidraw`
+CXXFLAGS+=-O3 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG) `pkg-config --cflags hidapi-hidraw`
 CFLAGS+=$(CXXFLAGS)
 
 OBJS=main.o USBaccessBasic.o USBaccess.o error.o
@@ -25,12 +25,15 @@ cleware_perl:
 	./install-lib.pl
 
 install: clewarecontrol
-	cp clewarecontrol $(DESTDIR)/usr/bin
-	cp clewarecontrol.1 $(DESTDIR)/usr/share/man/man1/clewarecontrol.1
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp clewarecontrol $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(PREFIX)/share/man/man1
+	cp clewarecontrol.1 $(DESTDIR)$(PREFIX)/share/man/man1/clewarecontrol.1
+	gzip -9 $(DESTDIR)$(PREFIX)/share/man/man1/clewarecontrol.1
 
 uninstall: clean
-	rm -f $(DESTDIR)/usr/bin/clewarecontrol
-	rm -f $(DESTDIR)/usr/share/man/man1/clewarecontrol.1.gz
+	rm -f $(DESTDIR)$(PREFIX)/bin/clewarecontrol
+	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/clewarecontrol.1
 
 clean:
 	rm -rf $(OBJS) clewarecontrol core gmon.out *.da build cleware_wrap.cxx _cleware.so cleware.py* cleware.pm *.o cleware.so
@@ -44,5 +47,5 @@ package: clean
 	tar czf clewarecontrol-$(VERSION).tgz clewarecontrol-$(VERSION)
 	rm -rf clewarecontrol-$(VERSION)
 
-check:
+stest:
 	cppcheck -v --enable=all --inconclusive -I. . 2> err.txt

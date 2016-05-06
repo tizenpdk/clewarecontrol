@@ -13,6 +13,10 @@ Since version 4.0 clewarecontrol uses this library to abstract the
 interfacing with the kernel. That way it may work on other OSes and new(er)
 kernel as well.
 
+If you get errors, try replacing -lhidapi by -lhidraw-libusb or hidapi-hidraw.
+If you still get errors, contact me.
+
+
 Installation:
 	make install
 
