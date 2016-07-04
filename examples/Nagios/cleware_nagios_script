@@ -13,22 +13,22 @@ if [ "$1" != "$PARAM1" -o "$2" != "$PARAM2" ] ; then
         exit 2
 fi
 
-MEASURED_TEMPERATURE=`/usr/bin/clewarecontrol -rt 2> /dev/null | grep 'Temperature' | awk '{ print $2; }'`
+MEASURED_TEMPERATURE=`/usr/bin/clewarecontrol -rt 2> /dev/null | grep 'Temperature' | awk '{ print $2; }' | sed '1!{$!d}'`
 
 NAGIOS_TEMPERATURE=`echo $MEASURED_TEMPERATURE  | sed -e "s/^\([0-9]*\).*$/\1/g"`
 if [ -z "$NAGIOS_TEMPERATURE" ] ; then
-        echo CRITICAL - invalid temperature $MEASURED_TEMPERATURE
+        echo "CRITICAL - invalid temperature $MEASURED_TEMPERATURE | temperature=$MEASURED_TEMPERATURE"
         exit 2
 fi
 if [ $NAGIOS_TEMPERATURE -gt $2 ] ; then
-        echo CRITICAL - temperature above $2 - $MEASURED_TEMPERATURE
+        echo "CRITICAL - temperature above $2 - $MEASURED_TEMPERATURE | temperature=$MEASURED_TEMPERATURE"
         exit 2
 fi
 
 if [ $NAGIOS_TEMPERATURE -gt $1 ] ; then
-        echo WARNING - temperature above $1 - $MEASURED_TEMPERATURE
+        echo WARNING - "temperature above $1 - $MEASURED_TEMPERATURE | temperature=$MEASURED_TEMPERATURE"
         exit 1
 fi
 
-echo OK - temperature is $MEASURED_TEMPERATURE
+echo OK - "temperature is $MEASURED_TEMPERATURE | temperature=$MEASURED_TEMPERATURE"
 exit 0
