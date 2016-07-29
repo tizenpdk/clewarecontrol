@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
 from distutils.core import setup, Extension
-
-cleware_module = Extension('_cleware',
-                           sources=['cleware_wrap.cxx', 'USBaccessBasic.cpp', 'USBaccess.cpp'],
-                           )
+srcs = ['cleware_wrap.cxx', 'USBaccessBasic.cpp', 'USBaccess.cpp']
+libs = ['hidapi-hidraw']
+cleware_module = Extension('_cleware', sources=srcs, libraries=libs)
 
 setup (name = 'cleware',
        version = '2.3',

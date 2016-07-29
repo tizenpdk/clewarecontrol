@@ -13,10 +13,16 @@ all: clewarecontrol
 clewarecontrol: $(OBJS)
 	$(CXX) $(OBJS) $(LDFLAGS) -o clewarecontrol
 
-cleware_python:
-	swig -c++ -python cleware.i
+cleware_python: pyswig
 	python setup.py build_ext --inplace
-	./install-lib.py
+	python install-lib.py
+
+cleware_python3: pyswig
+	python3 setup.py build_ext --inplace
+	python3 install-lib.py
+
+pyswig:
+	swig -c++ -python cleware.i
 
 cleware_perl:
 	swig -c++ -perl5 cleware.i
