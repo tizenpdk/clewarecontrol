@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from distutils.core import setup, Extension
 srcs = ['cleware_wrap.cxx', 'USBaccessBasic.cpp', 'USBaccess.cpp']
 libs = ['hidapi-hidraw']
