@@ -14,12 +14,10 @@ clewarecontrol: $(OBJS)
 	$(CXX) $(OBJS) $(LDFLAGS) -o clewarecontrol
 
 cleware_python: pyswig
-	python setup.py build_ext --inplace
-	python install-lib.py
+	python setup.py install
 
 cleware_python3: pyswig
-	python3 setup.py build_ext --inplace
-	python3 install-lib.py
+	python3 setup.py install
 
 pyswig:
 	swig -c++ -python cleware.i
@@ -42,7 +40,7 @@ uninstall: clean
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/clewarecontrol.1
 
 clean:
-	rm -rf $(OBJS) clewarecontrol core gmon.out *.da build cleware_wrap.cxx _cleware.so cleware.py* cleware.pm *.o cleware.so
+	rm -rf $(OBJS) clewarecontrol core gmon.out *.da build cleware_wrap.cxx *cleware*.so cleware.py* cleware.pm *.o
 
 package: clean
 	# source package
