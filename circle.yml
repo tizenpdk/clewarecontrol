@@ -48,6 +48,10 @@ dependencies:
     - cp setup.py_CI setup.py # use setup file with added libs
     - sudo make clean
     - sudo -- sh -c "make cleware_python"
+    
+    - ls -al
+    - ls -alR
+    
     - mkdir $CIRCLE_ARTIFACTS/python
     - cp -av cleware.py $CIRCLE_ARTIFACTS/python/ || exit 1
     - cp -av _cleware.so $CIRCLE_ARTIFACTS/python/ || exit 1
