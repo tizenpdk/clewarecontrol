@@ -1,5 +1,5 @@
 # $Revision: 100 $
-VERSION=4.3
+VERSION=4.4
 
 DEBUG=-g -W -pedantic #-pg #-fprofile-arcs
 LDFLAGS+=`pkg-config --libs hidapi-hidraw`
