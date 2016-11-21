@@ -47,12 +47,13 @@ dependencies:
 
 # --- python extension ---
     - sudo make clean
-    - sudo -- sh -c "make cleware_python"
-    - find . -type f -name '_cleware.so' -exec cp -av {} ./ \;
+    - make cleware_python
+    - make cleware_python3
+    - find . -type f -name '_cleware*.so' -exec cp -av {} ./ \;
     - mkdir $CIRCLE_ARTIFACTS/python
     - cp -av cleware.py $CIRCLE_ARTIFACTS/python/ || exit 1
-    - cp -av _cleware.so $CIRCLE_ARTIFACTS/python/ || exit 1
-    - ldd _cleware.so
+    - cp -av _cleware*.so $CIRCLE_ARTIFACTS/python/ || exit 1
+    - ldd _cleware*.so
 # --- python extension ---
 
     - make # make binary again
@@ -63,8 +64,8 @@ test:
     - echo 'mtools_skip_check=1' > ~/.mtoolsrc
   override:
     - ./clewarecontrol -l # test binary
-
-    - printf 'import cleware \n' | python # test python extension
+    - python -c "import cleware" # check python2 import
+    - python3 -c "import cleware" # check python3 import
     - ./example.py
     
     - printf 'use Module::Load; \n load cleware; \n '|perl -w # test perl module
