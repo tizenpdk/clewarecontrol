@@ -14,6 +14,7 @@ dependencies:
     - sudo apt-get install xvkbd > /dev/null 2> /dev/null
     - sudo apt-get install swig
     - sudo apt-get install libusb-dev
+    - sudo apt-get install libperl-dev
     - sudo apt-get install python-dev ; exit 0
 
 # install libhidapi ----------------
