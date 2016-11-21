@@ -46,7 +46,6 @@ dependencies:
 # --- perl extension ---
 
 # --- python extension ---
-    - cp setup.py_CI setup.py # use setup file with added libs
     - sudo make clean
     - sudo -- sh -c "make cleware_python"
     - find . -type f -name '_cleware.so' -exec cp -av {} ./ \;
