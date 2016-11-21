@@ -16,6 +16,8 @@ dependencies:
     - sudo apt-get install libusb-dev
     - sudo apt-get install libperl-dev
     - sudo apt-get install python-dev ; exit 0
+  post:
+    - pyenv local 3.5.2
 
 # install libhidapi ----------------
     - cp /etc/apt/sources.list /tmp/aa
