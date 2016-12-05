@@ -143,7 +143,7 @@ class CUSBaccess {
 		virtual int			GetManualOnTime(int deviceNo) ;			// returns how long (seconds) switch is manually turned on
 		virtual int			GetOnlineOnCount(int deviceNo) ;		// returns how often switch is turned on by USB command
 		virtual int			GetOnlineOnTime(int deviceNo) ;			// returns how long (seconds) switch is turned on by USB command
-		virtual int			GetMultiSwitch(int deviceNo, unsigned long int *mask, unsigned long int *value, int seqNumber) ;
+		virtual int			GetMultiSwitch(int deviceNo, unsigned long int *mask, unsigned long int *OUTPUT value, int seqNumber) ;
 		virtual int			SetMultiSwitch(int deviceNo, unsigned long int value) ;
 		virtual int			SetMultiConfig(int deviceNo, unsigned long int directions) ;
 		virtual int			GetCounter(int deviceNo, enum COUNTER_IDs counterID) ;	// COUNTER_IDs ununsed until now
