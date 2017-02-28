@@ -1,0 +1,14 @@
+Source: clewarecontrol
+Section: devel
+Priority: optional
+Maintainer: Donghoon Shin <dhs.shin@samsung.com>
+XSBC-Original-Maintainer: Folkert van Heusden <folkert@vanheusden.com>
+Build-Depends: debhelper (>= 8.0.0), libhidapi-dev (>= 0.8), pkg-config (>= 0.26)
+Standards-Version: 3.9.4
+Homepage: https://github.com/flok99/clewarecontrol
+
+Package: clewarecontrol
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A program to control devices by Cleware
+ control the USB devices made by Cleware GmbH.
